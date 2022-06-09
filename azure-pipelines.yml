@@ -4,8 +4,16 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 # adding comment to test a trigger
 
-trigger:
-- master
+# trigger:
+# - master
+
+# YAML file in the main branch
+schedules:
+- cron: "5 * * * *"
+  displayName: testing schedule build
+  branches:
+    include:
+    - master
 
 pool:
   vmImage: ubuntu-latest
