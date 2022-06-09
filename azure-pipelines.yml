@@ -4,10 +4,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 # YAML file in the main branch
-trigger : none
 
 schedules:
-- cron: "25 14 * * *"
+- cron: "27 14 * * *"
   displayName: testing schedule build
   branches:
     include:
