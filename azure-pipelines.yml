@@ -4,9 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 # YAML file in the main branch
-trigger :
-  include:
-  - master
+trigger:
+- master
 
 # schedules:
 # - cron: "5 * * * *"
