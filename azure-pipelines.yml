@@ -7,7 +7,7 @@
 trigger: none
 
 schedules:
-- cron: "17 13 * * *"
+- cron: "0 8 * * *"
   displayName: testing schedule build
   branches:
     include:
