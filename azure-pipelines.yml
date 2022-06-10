@@ -4,15 +4,15 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 # YAML file in the main branch
-trigger:
-- master
+# trigger:
+# - master
 
-# schedules:
-# - cron: "5 * * * *"
-#   displayName: testing schedule build
-#   branches:
-#     include:
-#     - master
+schedules:
+- cron: "*/5 * * * *"
+  displayName: testing schedule build
+  branches:
+    include:
+    - master
 
 pool:
   vmImage: ubuntu-latest
