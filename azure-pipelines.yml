@@ -8,11 +8,12 @@
 # - master
 
 schedules:
-- cron: "*/5 * * * *"
+- cron: "5 * * * *"
   displayName: testing schedule build
   branches:
     include:
     - master
+  always : false
 
 pool:
   vmImage: ubuntu-latest
