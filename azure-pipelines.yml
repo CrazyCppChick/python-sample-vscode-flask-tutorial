@@ -7,7 +7,7 @@
 trigger: none
 
 schedules:
-- cron: "*/5 * * * *"    # 5 * * * * is at 5 minutes in every hour, 12:05, 1:05, 2:05 etc.
+- cron: "17 13 * * *"
   displayName: testing schedule build
   branches:
     include:
