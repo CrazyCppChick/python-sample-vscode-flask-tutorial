@@ -1,6 +1,6 @@
 echo hello test
 dir 
-cd /d C:\
+cd /d C:\Users\v-susridhar.REDMOND\Desktop
 dir
 echo '$(Build.ArtifactStagingDirectory)'
 echo '$(System.DefaultWorkingDirectory)'
