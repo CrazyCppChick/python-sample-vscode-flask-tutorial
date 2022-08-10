@@ -41,6 +41,7 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
 - task: CmdLine@2
   inputs:
     script: |
