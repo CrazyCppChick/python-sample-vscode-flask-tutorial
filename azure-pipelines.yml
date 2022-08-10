@@ -50,6 +50,7 @@ steps:
       echo '$(System.DefaultWorkingDirectory)'
       echo '$(Agent.RootDirectory)'
       echo '$(Build.SourcesDirectory)'
+      echo '$(Pipeline.Workspace)'
     workingDirectory: 'C:\'
 
 - script: test.bat
