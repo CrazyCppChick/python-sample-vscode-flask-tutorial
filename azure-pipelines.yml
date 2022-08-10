@@ -46,4 +46,7 @@ steps:
     script: |
       echo testing 1..2...3     
       echo Hello world $(TESTNO)
-    workingDirectory: '$(ROOTDIR)'
+      echo '$(Build.ArtifactStagingDirectory)'
+      echo '$(System.DefaultWorkingDirectory)'
+      echo '$(Agent.RootDirectory)'
+    workingDirectory: 'C:\'
