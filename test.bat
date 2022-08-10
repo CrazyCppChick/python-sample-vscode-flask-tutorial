@@ -1,5 +1,5 @@
 echo hello test
 dir 
-cd /d C:\Users
+pushd \\iotse\test\windowsce\automation\users\v-susridhar
 dir
 echo finish
