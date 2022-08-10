@@ -40,7 +40,10 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
-
-- task: BatchScript@1
+- task: CmdLine@2
   inputs:
-    filename: 'test.bat'
+    script: |
+      echo Hello World from %AGENT_NAME%.
+      echo My ID is %AGENT_ID%.
+      echo AGENT_WORKFOLDER contents:
+      echo Over and out.
