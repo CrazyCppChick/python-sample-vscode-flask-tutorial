@@ -49,4 +49,5 @@ steps:
       echo '$(Build.ArtifactStagingDirectory)'
       echo '$(System.DefaultWorkingDirectory)'
       echo '$(Agent.RootDirectory)'
+      echo '$(Build.SourcesDirectory)'
     workingDirectory: 'C:\'
