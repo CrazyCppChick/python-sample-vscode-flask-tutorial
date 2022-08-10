@@ -46,5 +46,4 @@ steps:
     script: |
       echo testing 1..2...3     
       echo Hello world $(TESTNO)
-      echo dir
-    workingDirectory: '$(rootdir)'
+      echo  '$(System.DefaultWorkingDirectory)'
