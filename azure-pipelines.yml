@@ -44,4 +44,4 @@ steps:
   inputs:
     script: |
       echo testing 1..2...3     
-      echo Hello world ${{ testno }}
+      echo Hello world ${testno}
