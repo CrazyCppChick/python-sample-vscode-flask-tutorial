@@ -40,3 +40,7 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+- task: BatchScript@1
+  inputs:
+    filename: 'test.bat'
