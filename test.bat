@@ -1,9 +1,5 @@
 echo hello test
 dir 
-cd /d C:\Users\v-susridhar.REDMOND\Desktop
+cd /d C:\Users
 dir
-echo '$(Build.ArtifactStagingDirectory)'
-echo '$(System.DefaultWorkingDirectory)'
-echo '$(Agent.RootDirectory)'
-echo '$(Build.SourcesDirectory)'
 echo finish
