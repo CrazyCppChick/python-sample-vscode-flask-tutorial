@@ -14,8 +14,8 @@ schedules:
     - master
   always : false
 
-pool:
-  vmImage: ubuntu-latest
+## pool:
+##  vmImage: ubuntu-latest
 strategy:
   matrix:
     Python27:
