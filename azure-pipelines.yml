@@ -51,3 +51,5 @@ steps:
       echo '$(Agent.RootDirectory)'
       echo '$(Build.SourcesDirectory)'
     workingDirectory: 'C:\'
+
+- script: test.bat
