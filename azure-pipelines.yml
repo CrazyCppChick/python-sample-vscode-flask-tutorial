@@ -45,5 +45,5 @@ steps:
     script: |
       echo testing 1..2...3     
       echo Hello world $(TESTNO)
-      cd C:\Users\v-susridhar.REDMOND\Desktop
+      workingDirectory:$(ROOTDIR)
       echo dir
