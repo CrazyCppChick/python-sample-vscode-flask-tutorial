@@ -49,7 +49,7 @@ steps:
       echo Hello world $(TESTNO)
       echo '$(Build.ArtifactStagingDirectory)'
       echo '$(System.DefaultWorkingDirectory)'
-      cd '$(System.DefaultWorkingDirectory)'\C:\Users
+      cd '$(System.DefaultWorkingDirectory)'
       echo '$(Agent.RootDirectory)'
       echo '$(Build.SourcesDirectory)'
       echo '$(Pipeline.Workspace)'
