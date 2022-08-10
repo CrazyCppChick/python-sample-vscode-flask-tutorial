@@ -40,10 +40,15 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo Hello World from %AGENT_NAME%.
-      echo My ID is %AGENT_ID%.
-      echo AGENT_WORKFOLDER contents:
-      echo Over and out.
+
+- script: date /t
+  displayName: Get the date
+- script: dir
+  workingDirectory: $(Agent.BuildDirectory)
+  displayName: List contents of a folder
+- script: |
+    set MYVAR=foo
+    set
+  displayName: Set a variable and then display all
+  env:
+    aVarFromYaml: someValue
