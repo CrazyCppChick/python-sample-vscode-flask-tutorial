@@ -50,7 +50,7 @@ steps:
       echo '$(Build.ArtifactStagingDirectory)'
       echo '$(System.DefaultWorkingDirectory)'
       cd '$(System.DefaultWorkingDirectory)'\C:\Users
-       echo '$(Agent.RootDirectory)'
+      echo '$(Agent.RootDirectory)'
       echo '$(Build.SourcesDirectory)'
       echo '$(Pipeline.Workspace)'
     workingDirectory: 'C:\'
