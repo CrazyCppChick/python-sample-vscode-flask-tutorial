@@ -43,23 +43,20 @@
 #     pytest
 #   displayName: 'pytest'
 
-parameters:
-- name: vars
-  type: object
 
 jobs:
 - job: testJob
   displayName: test job
   variables:    
-    INETROOT: ${{ parameters.vars.ROOTDIR }}
+    INETROOT: ${{ ROOTDIR }}
   steps:
   - script: |    
         PUSHD %INETROOT%
-    workingDirectory: '${{ parameters.vars.ROOTDIR }}'
+    workingDirectory: '${{ROOTDIR }}'
     continueOnError: false  
   - script: |      
       call %INETROOT%\test.bat
-    workingDirectory: '${{ parameters.vars.ROOTDIR }}'
+    workingDirectory: '${{ROOTDIR }}'
     displayName : IncrementBuildNumber
     name: IncrementBuildNumber
     continueOnError: false   
