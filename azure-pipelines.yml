@@ -5,54 +5,73 @@
 
 # YAML file in the main branch
 
-trigger: none
+# trigger: none
 
-schedules:
-- cron: "0 8 * * *"
-  displayName: testing schedule build
-  branches:
-    include:
-    - master
-  always : false
+# schedules:
+# - cron: "0 8 * * *"
+#   displayName: testing schedule build
+#   branches:
+#     include:
+#     - master
+#   always : false
 
-pool:
-  vmImage: windows-latest
+# pool:
+#   vmImage: windows-latest
 
-strategy:
-  matrix:
-    Python27:
-      python.version: '2.7'
-    Python36:
-      python.version: '3.6'
-    Python37:
-      python.version: '3.7'
+# strategy:
+#   matrix:
+#     Python27:
+#       python.version: '2.7'
+#     Python36:
+#       python.version: '3.6'
+#     Python37:
+#       python.version: '3.7'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+# steps:
+# - task: UsePythonVersion@0
+#   inputs:
+#     versionSpec: '$(python.version)'
+#   displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+# - script: |
+#     python -m pip install --upgrade pip
+#     pip install -r requirements.txt
+#   displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+# - script: |
+#     pip install pytest pytest-azurepipelines
+#     pytest
+#   displayName: 'pytest'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo testing 1..2...3     
-      echo Hello world $(TESTNO)
-      echo '$(Build.ArtifactStagingDirectory)'
-      echo '$(System.DefaultWorkingDirectory)'
-      cd '$(System.DefaultWorkingDirectory)'
-      echo '$(Agent.RootDirectory)'
-      echo '$(Build.SourcesDirectory)'
-      echo '$(Pipeline.Workspace)'
-      pushd $(ROOTDIR)
-    workingDirectory: $(ROOTDIR)
+parameters:
+- name: lastJobName
+  type: string
+- name: pool
+  type: object
+- name: environmentName
+  type: string
+- name: enlistment
+  type: object
+- name: build
+  type: object
+- name: vars
+  type: object
+
+jobs:
+- job: testJob
+  displayName: test job
+  variables:    
+    INETROOT: ${{ parameters.vars.ROOTDIR }}
+  steps:
+  - script: |    
+        PUSHD %INETROOT%
+    workingDirectory: '${{ parameters.vars.ROOTDIR }}'
+    continueOnError: false  
+  - script: |      
+      call %INETROOT%\test.bat
+    workingDirectory: '${{ parameters.vars.ROOTDIR }}'
+    displayName : IncrementBuildNumber
+    name: IncrementBuildNumber
+    continueOnError: false   
+    condition: and(succeeded(), eq(coalesce(variables['IncrementBuildNumber'], false), true))          
+
