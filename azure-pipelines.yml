@@ -31,9 +31,6 @@ jobs:
   displayName: Test Run
   variables:    
     INETROOT: $(ROOTDIR)
-  
-    - script: |      
-      call %INETROOT%\test.bat
 
   steps:
   - task: UsePythonVersion@0
@@ -50,6 +47,9 @@ jobs:
       pip install pytest pytest-azurepipelines
       pytest
     displayName: 'pytest'
+  
+  - script: |      
+     call %INETROOT%\test.bat
 
   - task: CmdLine@2
     inputs:
