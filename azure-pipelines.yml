@@ -26,33 +26,40 @@ strategy:
     Python37:
       python.version: '3.7'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+jobs:
+- job: TestJob
+  displayName: Test Run
+  variables:    
+    INETROOT: $(ROOTDIR)
+  
+    - script: |      
+      call %INETROOT%\test.bat
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo testing 1..2...3     
-      echo Hello world $(TESTNO)
-      echo '$(Build.ArtifactStagingDirectory)'
-      echo '$(System.DefaultWorkingDirectory)'
-      cd '$(System.DefaultWorkingDirectory)'
-      echo '$(Agent.RootDirectory)'
-      echo '$(Build.SourcesDirectory)'
-      echo '$(Pipeline.Workspace)'
-    workingDirectory: 'C:\'
+  - script: |
+      pip install pytest pytest-azurepipelines
+      pytest
+    displayName: 'pytest'
 
-- script: test.bat
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo testing 1..2...3     
+        echo Hello world $(TESTNO)
+        echo '$(Build.ArtifactStagingDirectory)'
+        echo '$(System.DefaultWorkingDirectory)'
+        cd '$(System.DefaultWorkingDirectory)'
+        echo '$(Agent.RootDirectory)'
+        echo '$(Build.SourcesDirectory)'
+        echo '$(Pipeline.Workspace)'
+      workingDirectory: 'C:\'
