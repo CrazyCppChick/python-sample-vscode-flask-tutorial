@@ -44,16 +44,6 @@
 #   displayName: 'pytest'
 
 parameters:
-- name: lastJobName
-  type: string
-- name: pool
-  type: object
-- name: environmentName
-  type: string
-- name: enlistment
-  type: object
-- name: build
-  type: object
 - name: vars
   type: object
 
