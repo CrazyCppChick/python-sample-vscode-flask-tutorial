@@ -48,15 +48,15 @@ jobs:
 - job: testJob
   displayName: test job
   variables:    
-    INETROOT: ${{ ROOTDIR }}
+    INETROOT: $(ROOTDIR)
   steps:
   - script: |    
         PUSHD %INETROOT%
-    workingDirectory: '${{ROOTDIR }}'
+    workingDirectory: $(ROOTDIR)
     continueOnError: false  
   - script: |      
       call %INETROOT%\test.bat
-    workingDirectory: '${{ROOTDIR }}'
+    workingDirectory: $(ROOTDIR)
     displayName : IncrementBuildNumber
     name: IncrementBuildNumber
     continueOnError: false   
