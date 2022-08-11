@@ -4,6 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 # YAML file in the main branch
+
 trigger: none
 
 schedules:
@@ -26,40 +27,32 @@ strategy:
     Python37:
       python.version: '3.7'
 
-jobs:
-- job: TestJob
-  displayName: Test Run
-  variables:    
-    INETROOT: $(ROOTDIR)
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
 
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '$(python.version)'
-    displayName: 'Use Python $(python.version)'
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
 
-  - script: |
-      python -m pip install --upgrade pip
-      pip install -r requirements.txt
-    displayName: 'Install dependencies'
+- script: |
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: 'pytest'
 
-  - script: |
-      pip install pytest pytest-azurepipelines
-      pytest
-    displayName: 'pytest'
-  
-  - script: |      
-     call %INETROOT%\test.bat
-
-  - task: CmdLine@2
-    inputs:
-      script: |
-        echo testing 1..2...3     
-        echo Hello world $(TESTNO)
-        echo '$(Build.ArtifactStagingDirectory)'
-        echo '$(System.DefaultWorkingDirectory)'
-        cd '$(System.DefaultWorkingDirectory)'
-        echo '$(Agent.RootDirectory)'
-        echo '$(Build.SourcesDirectory)'
-        echo '$(Pipeline.Workspace)'
-      workingDirectory: 'C:\'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo testing 1..2...3     
+      echo Hello world $(TESTNO)
+      echo '$(Build.ArtifactStagingDirectory)'
+      echo '$(System.DefaultWorkingDirectory)'
+      cd '$(System.DefaultWorkingDirectory)'
+      echo '$(Agent.RootDirectory)'
+      echo '$(Build.SourcesDirectory)'
+      echo '$(Pipeline.Workspace)'
+      pushd $(ROOTDIR)
+    workingDirectory: $(ROOTDIR)
